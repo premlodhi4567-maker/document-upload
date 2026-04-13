@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<title>Marriage Portal - Drive Sync</title>
+	<title>Marriage Tokken Doecument Upload</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 	<style>
 		:root { --primary: #1a73e8; --success: #2e7d32; --danger: #d93025; }
@@ -45,38 +45,38 @@
 
 	<div class="section boy">
 		<span class="section-title">👦 Boy Documents</span>
-		<div class="field"><label>Photo * (20KB)</label><input type="file" id="b_photo" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_photo')">📸 Capture</button></div>
-		<div class="field"><label>PAN Card * (60KB)</label><input type="file" id="b_pan" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_pan')">📸 Capture</button></div>
-		<div class="field"><label>Marksheet * (60KB)</label><input type="file" id="b_mark" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_mark')">📸 Capture</button></div>
-		<div class="field"><label>Affidavit * (60KB)</label><input type="file" id="b_aff" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_aff')">📸 Capture</button></div>
-		<div class="field"><label>Aadhar Front *</label><input type="file" id="b_af" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_af')">📸 Capture</button></div>
+		<div class="field"><label>Photo * (20KB)</label><input type="file" id="b_photo" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_photo')">📸 Capture</button></div>
+		<div class="field"><label>PAN Card * (60KB)</label><input type="file" id="b_pan" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_pan')">📸 Capture</button></div>
+		<div class="field"><label>Marksheet * (60KB)</label><input type="file" id="b_mark" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_mark')">📸 Capture</button></div>
+		<div class="field"><label>Affidavit * (60KB)</label><input type="file" id="b_aff" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_aff')">📸 Capture</button></div>
+		<div class="field"><label>Aadhar Front *</label><input type="file" id="b_af" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_af')">📸 Capture</button></div>
 		<div class="field"><label>Aadhar Back</label><input type="file" id="b_ab" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_ab')">📸 Capture</button></div>
 	</div>
 
 	<div class="section girl">
 		<span class="section-title">👧 Girl Documents</span>
-		<div class="field"><label>Photo * (20KB)</label><input type="file" id="g_photo" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_photo')">📸 Capture</button></div>
-		<div class="field"><label>PAN Card * (60KB)</label><input type="file" id="g_pan" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_pan')">📸 Capture</button></div>
-		<div class="field"><label>Marksheet * (60KB)</label><input type="file" id="g_mark" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_mark')">📸 Capture</button></div>
-		<div class="field"><label>Affidavit * (60KB)</label><input type="file" id="g_aff" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_aff')">📸 Capture</button></div>
-		<div class="field"><label>Aadhar Front *</label><input type="file" id="g_af" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_af')">📸 Capture</button></div>
+		<div class="field"><label>Photo * (20KB)</label><input type="file" id="g_photo" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_photo')">📸 Capture</button></div>
+		<div class="field"><label>PAN Card * (60KB)</label><input type="file" id="g_pan" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_pan')">📸 Capture</button></div>
+		<div class="field"><label>Marksheet * (60KB)</label><input type="file" id="g_mark" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_mark')">📸 Capture</button></div>
+		<div class="field"><label>Affidavit * (60KB)</label><input type="file" id="g_aff" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_aff')">📸 Capture</button></div>
+		<div class="field"><label>Aadhar Front *</label><input type="file" id="g_af" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_af')">📸 Capture</button></div>
 		<div class="field"><label>Aadhar Back</label><input type="file" id="g_ab" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_ab')">📸 Capture</button></div>
 	</div>
 
 	<div class="section marr">
 		<span class="section-title">💍 Marriage Details</span>
-		<div class="field"><label>Marriage Certificate * (60KB)</label><input type="file" id="m_cert" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('m_cert')">📸 Capture</button></div>
+		<div class="field"><label>Marriage Certificate * (60KB)</label><input type="file" id="m_cert" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('m_cert')">📸 Capture</button></div>
 	</div>
 
 	<div class="section wit">
 		<span class="section-title">👥 Witnesses</span>
-		<div class="field"><label>W1 Photo * (20KB)</label><input type="file" id="w1_photo" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w1_photo')">📸 Capture</button></div>
-		<div class="field"><label>W1 Affidavit * (60KB)</label><input type="file" id="w1_aff" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w1_aff')">📸 Capture</button></div>
-		<div class="field"><label>W1 Aadhar Front *</label><input type="file" id="w1_af" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w1_af')">📸 Capture</button></div>
+		<div class="field"><label>W1 Photo * (20KB)</label><input type="file" id="w1_photo" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w1_photo')">📸 Capture</button></div>
+		<div class="field"><label>W1 Affidavit * (60KB)</label><input type="file" id="w1_aff" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w1_aff')">📸 Capture</button></div>
+		<div class="field"><label>W1 Aadhar Front *</label><input type="file" id="w1_af" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w1_af')">📸 Capture</button></div>
 		<div class="field"><label>W1 Aadhar Back</label><input type="file" id="w1_ab" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w1_ab')">📸 Capture</button></div>
 		<hr>
-		<div class="field"><label>W2 Photo * (20KB)</label><input type="file" id="w2_photo" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w2_photo')">📸 Capture</button></div>
-		<div class="field"><label>W2 Aadhar Front *</label><input type="file" id="w2_af" class="must" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w2_af')">📸 Capture</button></div>
+		<div class="field"><label>W2 Photo * (20KB)</label><input type="file" id="w2_photo" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w2_photo')">📸 Capture</button></div>
+		<div class="field"><label>W2 Aadhar Front *</label><input type="file" id="w2_af" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w2_af')">📸 Capture</button></div>
 		<div class="field"><label>W2 Aadhar Back</label><input type="file" id="w2_ab" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w2_ab')">📸 Capture</button></div>
 	</div>
 
@@ -126,7 +126,7 @@
 		activeId = id;
 		navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
 		.then(s => { video.srcObject = s; document.getElementById('cam-modal').style.display = 'flex'; })
-		.catch(err => alert("Camera Error: Access denied. Ensure you are on HTTPS."));
+		.catch(err => alert("Camera Access Denied."));
 	}
 
 	function stopCam() {
@@ -165,111 +165,101 @@
 		const folderID = document.getElementById('adv_name').value.trim();
 		if(!folderID || folderID.includes("Fetching")) { alert("Wait for ID!"); return; }
 
-		// Required field validation
-		const requiredFields = [
-			{id: 'b_photo', name: 'Boy Photo'}, {id: 'b_pan', name: 'Boy PAN'},
-			{id: 'b_mark', name: 'Boy Marksheet'}, {id: 'b_aff', name: 'Boy Affidavit'},
-			{id: 'b_af', name: 'Boy Aadhar Front'}, {id: 'g_photo', name: 'Girl Photo'},
-			{id: 'g_pan', name: 'Girl PAN'}, {id: 'g_mark', name: 'Girl Marksheet'},
-			{id: 'g_aff', name: 'Girl Affidavit'}, {id: 'g_af', name: 'Girl Aadhar Front'},
-			{id: 'm_cert', name: 'Marriage Certificate'}, {id: 'w1_photo', name: 'Witness 1 Photo'},
-			{id: 'w1_aff', name: 'Witness 1 Affidavit'}, {id: 'w1_af', name: 'Witness 1 Aadhar Front'},
-			{id: 'w2_photo', name: 'Witness 2 Photo'}, {id: 'w2_af', name: 'Witness 2 Aadhar Front'}
+		// Validation
+		const required = [
+			{id:'b_photo',n:'Boy Photo'},{id:'b_pan',n:'Boy PAN'},{id:'b_mark',n:'Boy Marksheet'},
+			{id:'b_aff',n:'Boy Affidavit'},{id:'b_af',n:'Boy Aadhar Front'},
+			{id:'g_photo',n:'Girl Photo'},{id:'g_pan',n:'Girl PAN'},{id:'g_mark',n:'Girl Marksheet'},
+			{id:'g_aff',n:'Girl Affidavit'},{id:'g_af',n:'Girl Aadhar Front'},
+			{id:'m_cert',n:'Marriage Cert'},{id:'w1_photo',n:'W1 Photo'},
+			{id:'w1_aff',n:'W1 Affidavit'},{id:'w1_af',n:'W1 Aadhar Front'},
+			{id:'w2_photo',n:'W2 Photo'},{id:'w2_af',n:'W2 Aadhar Front'}
 		];
 
-		const missing = requiredFields.filter(f => !document.getElementById(f.id).files[0]);
-		if (missing.length > 0) {
-			alert('Please upload: ' + missing.map(m => m.name).join(', '));
-			return;
+		for(let f of required) {
+			const el = document.getElementById(f.id);
+			if(!el || !el.files || !el.files[0]) { alert("Missing: " + f.n); return; }
 		}
 
-		stat.innerText = "⏳ Processing and Zipping...";
+		stat.innerText = "⏳ Zipping...";
 		stat.style.color = "orange";
 
 		try {
 			const zip = new JSZip();
 			
-			// 1. Single Files (Photos, PAN, Certs)
-			const singleFiles = [
-				{id:'b_photo', n:'Boy_Photo.jpeg', l:20}, {id:'b_pan', n:'Boy_PAN.jpeg', l:60}, 
+			// 1. Single Photos & Documents
+			const singles = [
+				{id:'b_photo', n:'Boy_Photo.jpeg', l:20}, {id:'b_pan', n:'Boy_PAN.jpeg', l:60},
 				{id:'b_mark', n:'Boy_Marksheet.jpeg', l:60}, {id:'b_aff', n:'Boy_Affidavit.jpeg', l:60},
-				{id:'g_photo', n:'Girl_Photo.jpeg', l:20}, {id:'g_pan', n:'Girl_PAN.jpeg', l:60}, 
+				{id:'g_photo', n:'Girl_Photo.jpeg', l:20}, {id:'g_pan', n:'Girl_PAN.jpeg', l:60},
 				{id:'g_mark', n:'Girl_Marksheet.jpeg', l:60}, {id:'g_aff', n:'Girl_Affidavit.jpeg', l:60},
 				{id:'m_cert', n:'Marriage_Cert.jpeg', l:60},
-				{id:'w1_photo', n:'W1_Photo.jpeg', l:20}, {id:'w1_aff', n:'W1_Affidavit.jpeg', l:60}, 
+				{id:'w1_photo', n:'W1_Photo.jpeg', l:20}, {id:'w1_aff', n:'W1_Affidavit.jpeg', l:60},
 				{id:'w2_photo', n:'W2_Photo.jpeg', l:20}
 			];
 
-			for (let item of singleFiles) {
-				const f = document.getElementById(item.id).files[0];
-				if(f) {
-					const img = await read(f);
+			for(let s of singles) {
+				const el = document.getElementById(s.id);
+				if(el && el.files[0]) {
+					const img = await read(el.files[0]);
 					const c = document.createElement('canvas');
 					c.width = img.width; c.height = img.height;
 					c.getContext('2d').drawImage(img,0,0);
-					zip.file(item.n, await compressStrict(c, item.l));
+					zip.file(s.n, await compressStrict(c, s.l));
 				}
 			}
 
-			// 2. Merged Aadhar Files (Front + Back)
-			const aadhars = [
+			// 2. Merged Aadhars
+			const merged = [
 				{f:'b_af', b:'b_ab', n:'Boy_Aadhar_Merged.jpeg'},
 				{f:'g_af', b:'g_ab', n:'Girl_Aadhar_Merged.jpeg'},
 				{f:'w1_af', b:'w1_ab', n:'W1_Aadhar_Merged.jpeg'},
 				{f:'w2_af', b:'w2_ab', n:'W2_Aadhar_Merged.jpeg'}
 			];
 
-			for (let a of aadhars) {
-				const front = document.getElementById(a.f).files[0];
-				const back = document.getElementById(a.b).files[0];
-				if(front) {
-					const imgF = await read(front);
+			for(let m of merged) {
+				const fEl = document.getElementById(m.f);
+				const bEl = document.getElementById(m.b);
+				const fFile = fEl ? fEl.files[0] : null;
+				const bFile = bEl ? bEl.files[0] : null;
+
+				if(fFile) {
+					const imgF = await read(fFile);
 					const c = document.createElement('canvas');
-					if(back) {
-						const imgB = await read(back);
+					if(bFile) {
+						const imgB = await read(bFile);
 						c.width = Math.max(imgF.width, imgB.width);
 						c.height = imgF.height + imgB.height + 20;
 						const ctx = c.getContext('2d');
 						ctx.fillStyle = "white"; ctx.fillRect(0,0,c.width,c.height);
-						ctx.drawImage(imgF, (c.width-imgF.width)/2, 0); 
-						ctx.drawImage(imgB, (c.width-imgB.width)/2, imgF.height + 20);
+						ctx.drawImage(imgF, (c.width-imgF.width)/2, 0);
+						ctx.drawImage(imgB, (c.width-imgB.width)/2, imgF.height+20);
 					} else {
 						c.width = imgF.width; c.height = imgF.height;
 						c.getContext('2d').drawImage(imgF,0,0);
 					}
-					zip.file(a.n, await compressStrict(c, 60));
+					zip.file(m.n, await compressStrict(c, 60));
 				}
 			}
 
 			const content = await zip.generateAsync({type:"base64"});
-			stat.innerText = "🚀 Uploading to Drive...";
-
+			stat.innerText = "🚀 Uploading...";
 			const formData = new FormData();
 			formData.append('zipData', content);
 			formData.append('fileName', folderID + ".zip");
 			
-			const response = await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: formData });
-			const result = await response.text();
-			
-			stat.innerText = "✅ Done!";
+			const res = await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: formData });
+			stat.innerText = "✅ Success!";
 			stat.style.color = "green";
-			showSuccessPopup(folderID, result);
-
+			document.getElementById('popupFolderId').textContent = folderID;
+			document.getElementById('successPopup').style.display = 'flex';
 		} catch (e) {
 			stat.innerText = "Error: " + e.message;
 			stat.style.color = "red";
 		}
 	}
 
-	function showSuccessPopup(id) {
-		document.getElementById('popupFolderId').textContent = id;
-		document.getElementById('successPopup').style.display = 'flex';
-	}
-
-	function closeSuccessPopup() {
-		document.getElementById('successPopup').style.display = 'none';
-		location.reload();
-	}
+	function closeSuccessPopup() { location.reload(); }
 </script>
 </body>
 </html>
