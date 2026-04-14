@@ -8,32 +8,452 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
 	<style>
-		:root { --primary: #1a73e8; --success: #2e7d32; --danger: #d93025; }
-		body { font-family: sans-serif; background: #eef2f5; padding: 10px; margin: 0; }
-		.container { max-width: 650px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-		.adv-section { background: #fffde7; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #fbc02d; }
-		.adv-input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 1.5em; font-weight: bold; text-align: center; background: #eee; }
-		.section { margin-bottom: 20px; padding: 15px; border-radius: 10px; border-top: 5px solid #ccc; background: #fafafa; }
-		.boy { border-color: #2196f3; } .girl { border-color: #e91e63; } .wit { border-color: #673ab7; } .marr { border-color: #ff9800; }
-		.section-title { font-weight: bold; display: block; margin-bottom: 10px; color: #444; text-transform: uppercase; }
-		.field { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-		label { font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.85em; }
+		:root { 
+			--primary: #1a73e8; 
+			--success: #2e7d32; 
+			--danger: #d93025;
+			--mobile-padding: 15px;
+			--desktop-padding: 20px;
+			--touch-target: 44px;
+		}
+		
+		* { 
+			box-sizing: border-box; 
+			-webkit-tap-highlight-color: transparent;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			user-select: none;
+		}
+		
+		input, label, button { 
+			-webkit-user-select: auto;
+			user-select: auto;
+		}
+		
+		body { 
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+			background: #eef2f5; 
+			padding: var(--mobile-padding); 
+			margin: 0; 
+			line-height: 1.4;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+		
+		.container { 
+			max-width: 650px; 
+			margin: 0 auto; 
+			background: #fff; 
+			padding: var(--mobile-padding); 
+			border-radius: 15px; 
+			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+			min-height: 100vh;
+		}
+		
+		.adv-section { 
+			background: #fffde7; 
+			padding: var(--mobile-padding); 
+			border-radius: 10px; 
+			margin-bottom: 20px; 
+			border: 2px solid #fbc02d;
+		}
+		
+		.adv-input { 
+			width: 100%; 
+			padding: 16px; 
+			border: 1px solid #ccc; 
+			border-radius: 8px; 
+			box-sizing: border-box; 
+			font-size: 1.2em; 
+			font-weight: bold; 
+			text-align: center; 
+			background: #eee;
+			min-height: var(--touch-target);
+		}
+		
+		.section { 
+			margin-bottom: 20px; 
+			padding: var(--mobile-padding); 
+			border-radius: 10px; 
+			border-top: 5px solid #ccc; 
+			background: #fafafa;
+			transition: transform 0.2s ease;
+		}
+		
+		.section:active {
+			transform: scale(0.98);
+		}
+		
+		.boy { border-color: #2196f3; } 
+		.girl { border-color: #e91e63; } 
+		.wit { border-color: #673ab7; } 
+		.marr { border-color: #ff9800; }
+		
+		.section-title { 
+			font-weight: bold; 
+			display: block; 
+			margin-bottom: 15px; 
+			color: #444; 
+			text-transform: uppercase; 
+			font-size: 1.1em;
+		}
+		
+		.field { 
+			margin-bottom: 20px; 
+			border-bottom: 1px solid #eee; 
+			padding-bottom: 15px;
+			position: relative;
+		}
+		
+		label { 
+			font-weight: 600; 
+			display: block; 
+			margin-bottom: 8px; 
+			font-size: 0.9em;
+			color: #333;
+		}
+		
 		.req { color: var(--danger); }
-		.btn-cam { width: 100%; padding: 8px; background: #fff; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; margin-top: 5px; font-weight: bold; }
-		.thumb-container { margin-top: 8px; text-align: center; }
-		.thumb-preview { max-width: 100%; max-height: 150px; display: block; margin: 5px auto; border-radius: 5px; }
-		#btn-submit { width: 100%; padding: 18px; background: var(--success); color: #fff; border: none; border-radius: 12px; font-size: 1.2em; font-weight: bold; cursor: pointer; }
-		#status { margin-top: 15px; text-align: center; font-weight: bold; padding: 12px; border-radius: 8px; }
-		#cam-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:999; flex-direction:column; }
-		#video { width:100%; height:80%; object-fit: cover; }
-		.shutter { width:70px; height:70px; background:#fff; border-radius:50%; margin: 15px auto; border: 5px solid #444; cursor: pointer; }
-		#crop-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:1000; flex-direction:column; }
-		#crop-container { flex:1; display:flex; justify-content:center; align-items:center; padding:20px; }
-		#crop-image { max-width:100%; max-height:100%; }
-		.crop-controls { background:#333; padding:15px; display:flex; justify-content:center; gap:10px; }
-		.crop-btn { padding:10px 20px; border:none; border-radius:5px; cursor:pointer; font-weight:bold; }
+		
+		input[type="file"] {
+			position: absolute;
+			opacity: 0;
+			width: 100%;
+			height: 100%;
+			cursor: pointer;
+			font-size: 16px; /* Prevent zoom on iOS */
+		}
+		
+		.btn-cam { 
+			width: 100%; 
+			padding: 12px; 
+			background: #fff; 
+			border: 2px solid #ddd; 
+			border-radius: 8px; 
+			cursor: pointer; 
+			margin-top: 8px; 
+			font-weight: bold;
+			min-height: var(--touch-target);
+			font-size: 16px;
+			transition: all 0.2s ease;
+			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		}
+		
+		.btn-cam:hover {
+			background: #f8f9fa;
+			border-color: #007bff;
+			transform: translateY(-1px);
+			box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+		}
+		
+		.btn-cam:active {
+			transform: translateY(0);
+			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		}
+		
+		.thumb-container { 
+			margin-top: 10px; 
+			text-align: center;
+			position: relative;
+		}
+		
+		.thumb-preview { 
+			max-width: 100%; 
+			max-height: 120px; 
+			display: block; 
+			margin: 5px auto; 
+			border-radius: 8px;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+			transition: transform 0.2s ease;
+		}
+		
+		.thumb-preview:hover {
+			transform: scale(1.02);
+		}
+		
+		#btn-submit { 
+			width: 100%; 
+			padding: 20px; 
+			background: var(--success); 
+			color: #fff; 
+			border: none; 
+			border-radius: 12px; 
+			font-size: 1.1em; 
+			font-weight: bold; 
+			cursor: pointer;
+			min-height: var(--touch-target);
+			transition: all 0.2s ease;
+			box-shadow: 0 4px 8px rgba(46,125,50,0.3);
+			margin-top: 20px;
+		}
+		
+		#btn-submit:hover {
+			background: #2e7d32;
+			transform: translateY(-2px);
+			box-shadow: 0 6px 12px rgba(46,125,50,0.4);
+		}
+		
+		#btn-submit:active {
+			transform: translateY(0);
+			box-shadow: 0 2px 4px rgba(46,125,50,0.3);
+		}
+		
+		#status { 
+			margin-top: 15px; 
+			text-align: center; 
+			font-weight: bold; 
+			padding: 15px; 
+			border-radius: 8px;
+			font-size: 0.95em;
+		}
+		
+		/* Modal Styles */
+		#cam-modal, #crop-modal { 
+			display:none; 
+			position:fixed; 
+			top:0; left:0; 
+			width:100%; height:100%; 
+			background:#000; 
+			z-index:999; 
+			flex-direction:column;
+			-webkit-backdrop-filter: blur(5px);
+			backdrop-filter: blur(5px);
+		}
+		
+		#video { 
+			width:100%; 
+			height:70%; 
+			object-fit: cover;
+			background: #000;
+		}
+		
+		.shutter { 
+			width:80px; height:80px; 
+			background:#fff; 
+			border-radius:50%; 
+			margin: 20px auto; 
+			border: 5px solid #444; 
+			cursor: pointer;
+			transition: all 0.2s ease;
+			box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+		}
+		
+		.shutter:hover {
+			transform: scale(1.1);
+			box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+		}
+		
+		.shutter:active {
+			transform: scale(0.95);
+		}
+		
+		#crop-container { 
+			flex:1; 
+			display:flex; 
+			justify-content:center; 
+			align-items:center; 
+			padding:10px;
+			overflow: hidden;
+		}
+		
+		#crop-image { 
+			max-width:100%; 
+			max-height:100%;
+			display: block;
+		}
+		
+		.crop-controls { 
+			background:#333; 
+			padding:15px; 
+			display:flex; 
+			justify-content:center; 
+			gap:15px;
+			flex-wrap: wrap;
+		}
+		
+		.crop-btn { 
+			padding:12px 24px; 
+			border:none; 
+			border-radius:8px; 
+			cursor:pointer; 
+			font-weight:bold;
+			min-height: var(--touch-target);
+			font-size: 16px;
+			transition: all 0.2s ease;
+			box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+		}
+		
+		.crop-btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+		}
+		
+		.crop-btn:active {
+			transform: translateY(0);
+		}
+		
 		.crop-ok { background:#4CAF50; color:#fff; }
 		.crop-cancel { background:#f44336; color:#fff; }
+		
+		/* Desktop optimizations */
+		@media (min-width: 768px) {
+			body {
+				padding: 20px;
+			}
+			
+			.container {
+				padding: var(--desktop-padding);
+				box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+			}
+			
+			.adv-section, .section {
+				padding: var(--desktop-padding);
+			}
+			
+			#video {
+				height: 80%;
+			}
+			
+			.shutter {
+				width: 70px;
+				height: 70px;
+				margin: 15px auto;
+			}
+			
+			#crop-container {
+				padding: 20px;
+			}
+		}
+		
+		/* Small mobile optimizations */
+		@media (max-width: 360px) {
+			body {
+				padding: 10px;
+			}
+			
+			.container {
+				padding: 12px;
+				border-radius: 10px;
+			}
+			
+			.section-title {
+				font-size: 1em;
+			}
+			
+			.btn-cam, #btn-submit {
+				font-size: 14px;
+				padding: 10px;
+			}
+			
+			.crop-btn {
+				padding: 10px 20px;
+				font-size: 14px;
+			}
+		}
+		
+		/* Performance optimizations */
+		.thumb-preview {
+			content-visibility: auto;
+			contain-intrinsic-size: 120px;
+		}
+		
+		.section {
+			content-visibility: auto;
+			contain-intrinsic-size: 200px;
+		}
+		
+		/* Mobile-specific UI improvements */
+		.loading-spinner {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			border: 3px solid rgba(255,255,255,.3);
+			border-radius: 50%;
+			border-top-color: #fff;
+			animation: spin 1s ease-in-out infinite;
+		}
+		
+		@keyframes spin {
+			to { transform: rotate(360deg); }
+		}
+		
+		.progress-bar {
+			width: 100%;
+			height: 4px;
+			background: #e0e0e0;
+			border-radius: 2px;
+			overflow: hidden;
+			margin: 10px 0;
+		}
+		
+		.progress-fill {
+			height: 100%;
+			background: var(--success);
+			width: 0%;
+			transition: width 0.3s ease;
+		}
+		
+		.toast {
+			position: fixed;
+			bottom: 20px;
+			left: 50%;
+			transform: translateX(-50%);
+			background: #333;
+			color: white;
+			padding: 12px 20px;
+			border-radius: 8px;
+			font-size: 14px;
+			z-index: 2000;
+			opacity: 0;
+			transition: opacity 0.3s ease;
+			max-width: 90%;
+			text-align: center;
+		}
+		
+		.toast.show {
+			opacity: 1;
+		}
+		
+		.toast.success { background: #4CAF50; }
+		.toast.error { background: #f44336; }
+		.toast.warning { background: #ff9800; }
+		
+		/* Mobile keyboard optimizations */
+		@media (max-width: 768px) and (orientation: landscape) {
+			.container {
+				min-height: auto;
+				padding-bottom: 20px;
+			}
+		}
+		
+		/* Dark mode support for mobile */
+		@media (prefers-color-scheme: dark) {
+			body {
+				background: #1a1a1a;
+				color: #fff;
+			}
+			
+			.container {
+				background: #2d2d2d;
+				box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+			}
+			
+			.section {
+				background: #383838;
+				border-color: #555;
+			}
+			
+			.btn-cam {
+				background: #3d3d3d;
+				border-color: #555;
+				color: #fff;
+			}
+			
+			.btn-cam:hover {
+				background: #4d4d4d;
+				border-color: #007bff;
+			}
+		}
 	</style>
 </head>
 <body>
@@ -114,21 +534,246 @@
 
 <script>
 	const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwePRZutgQObbH8bb9Ms6yC5jKCQKFDI_ZU_OGqOWK11jTIZKT83M_R7KC4GUnNtUt0/exec';
-
+	
+	// Throttle function for performance
+	function throttle(func, limit) {
+		let inThrottle;
+		return function() {
+			const args = arguments;
+			const context = this;
+			if (!inThrottle) {
+				func.apply(context, args);
+				inThrottle = true;
+				setTimeout(() => inThrottle = false, limit);
+			}
+		};
+	}
+	
+	// Debounce function for input handling
+	function debounce(func, wait) {
+		let timeout;
+		return function executedFunction(...args) {
+			const later = () => {
+				clearTimeout(timeout);
+				func(...args);
+			};
+			clearTimeout(timeout);
+			timeout = setTimeout(later, wait);
+		};
+	}
+	
+	// Intersection Observer for lazy loading
+	let lazyObserver;
+	if ('IntersectionObserver' in window) {
+		lazyObserver = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+					lazyObserver.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.1 });
+	}
+	
+	// Initialize when DOM is ready
+	function initializeApp() {
+		// Observe sections for lazy loading
+		if (lazyObserver) {
+			document.querySelectorAll('.section').forEach(section => {
+				lazyObserver.observe(section);
+			});
+		}
+		
+		// Fetch ID with performance optimization
+		requestIdleCallback(() => {
+			fetchID();
+		});
+		
+		// Add touch optimizations
+		addTouchOptimizations();
+	}
+	
+	// Fetch ID with caching
 	async function fetchID() {
 		const input = document.getElementById('adv_name');
+		const cachedId = localStorage.getItem('folderId');
+		const cacheTime = localStorage.getItem('folderIdTime');
+		const now = Date.now();
+		
+		// Use cached ID if less than 1 hour old
+		if (cachedId && cacheTime && (now - parseInt(cacheTime)) < 3600000) {
+			input.value = cachedId;
+			return;
+		}
+		
 		try {
-			const r = await fetch(GOOGLE_SCRIPT_URL);
+			const controller = new AbortController();
+			const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+			
+			const r = await fetch(GOOGLE_SCRIPT_URL, { 
+				signal: controller.signal,
+				cache: 'no-cache'
+			});
+			clearTimeout(timeoutId);
 			const id = await r.text();
 			input.value = id;
-		} catch (e) { input.value = "ID-" + Math.floor(1000 + Math.random() * 9000); }
+			
+			// Cache the ID
+			localStorage.setItem('folderId', id);
+			localStorage.setItem('folderIdTime', now.toString());
+		} catch (e) { 
+			console.log('ID fetch failed, using fallback');
+			input.value = "ID-" + Math.floor(1000 + Math.random() * 9000);
+		}
 	}
-	window.onload = fetchID;
+	
+	// Touch optimizations
+	function addTouchOptimizations() {
+		// Prevent double-tap zoom on buttons
+		document.querySelectorAll('button, .btn-cam').forEach(btn => {
+			btn.addEventListener('touchend', function(e) {
+				e.preventDefault();
+				this.click();
+			}, { passive: false });
+		});
+		
+		// Add haptic feedback if supported
+		if ('vibrate' in navigator) {
+			document.querySelectorAll('.btn-cam, #btn-submit').forEach(btn => {
+				btn.addEventListener('click', () => {
+					navigator.vibrate(50);
+				});
+			});
+		}
+	}
+	
+	// Toast notification system
+	function showToast(message, type = 'info', duration = 3000) {
+		const existingToast = document.querySelector('.toast');
+		if (existingToast) {
+			existingToast.remove();
+		}
+		
+		const toast = document.createElement('div');
+		toast.className = `toast ${type}`;
+		toast.textContent = message;
+		document.body.appendChild(toast);
+		
+		// Trigger animation
+		requestAnimationFrame(() => {
+			toast.classList.add('show');
+		});
+		
+		// Auto remove
+		setTimeout(() => {
+			toast.classList.remove('show');
+			setTimeout(() => toast.remove(), 300);
+		}, duration);
+	}
+	
+	// Progress indicator
+	function updateProgress(percent, message = '') {
+		const status = document.getElementById('status');
+		if (status) {
+			status.innerHTML = message + '<div class="progress-bar"><div class="progress-fill" style="width: ' + percent + '%"></div></div>';
+		}
+	}
+	
+	// Initialize app
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initializeApp);
+	} else {
+		initializeApp();
+	}
 
 	let activeId = '';
 	const video = document.getElementById('video');
 	let cropper = null;
 	let capturedCanvas = null;
+	let isProcessing = false;
+	
+	// Performance: Cache DOM elements
+	const domCache = {
+		camModal: null,
+		cropModal: null,
+		cropImage: null,
+		cropContainer: null
+	};
+	
+	// Initialize DOM cache
+	function cacheElements() {
+		domCache.camModal = document.getElementById('cam-modal');
+		domCache.cropModal = document.getElementById('crop-modal');
+		domCache.cropImage = document.getElementById('crop-image');
+		domCache.cropContainer = document.getElementById('crop-container');
+	}
+	
+	// Call cacheElements early
+	cacheElements();
+	
+	// Document-specific image dimensions
+	function getDocumentDimensions(fieldId) {
+		const dimensions = {
+			// Photos - smaller dimensions for 20KB limit
+			'b_photo': { maxWidth: 800, maxHeight: 600, quality: 0.7 },
+			'g_photo': { maxWidth: 800, maxHeight: 600, quality: 0.7 },
+			'w1_photo': { maxWidth: 800, maxHeight: 600, quality: 0.7 },
+			'w2_photo': { maxWidth: 800, maxHeight: 600, quality: 0.7 },
+			
+			// Documents - medium dimensions for 60KB limit
+			'b_pan': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			'b_mark': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			'b_aff': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			'b_af': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			'b_ab': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			
+			'g_pan': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			'g_mark': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			'g_aff': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			'g_af': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			'g_ab': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			
+			'm_cert': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			'w1_aff': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			'w1_af': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			'w1_ab': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			'w2_af': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			'w2_ab': { maxWidth: 1200, maxHeight: 800, quality: 0.8 }
+		};
+		
+		return dimensions[fieldId] || { maxWidth: 1200, maxHeight: 800, quality: 0.8 };
+	}
+	
+	// Function to resize canvas according to document rules
+	function resizeCanvasForDocument(canvas, fieldId) {
+		const dims = getDocumentDimensions(fieldId);
+		const { maxWidth, maxHeight, quality } = dims;
+		
+		let width = canvas.width;
+		let height = canvas.height;
+		
+		// Calculate new dimensions if image is larger than limits
+		if (width > maxWidth || height > maxHeight) {
+			const ratio = Math.min(maxWidth / width, maxHeight / height);
+			width *= ratio;
+			height *= ratio;
+			
+			// Create new resized canvas
+			const resizedCanvas = document.createElement('canvas');
+			resizedCanvas.width = width;
+			resizedCanvas.height = height;
+			const ctx = resizedCanvas.getContext('2d');
+			
+			// Draw with better quality
+			ctx.imageSmoothingEnabled = true;
+			ctx.imageSmoothingQuality = 'high';
+			ctx.drawImage(canvas, 0, 0, width, height);
+			
+			return resizedCanvas;
+		}
+		
+		return canvas;
+	}
 
 	function showThumb(input) {
 		const file = input.files[0];
@@ -136,55 +781,133 @@
 			let field = input.closest('.field');
 			let container = field.querySelector('.thumb-container') || document.createElement('div');
 			container.className = 'thumb-container';
-			const reader = new FileReader();
-			reader.onload = e => { container.innerHTML = '<img src="' + e.target.result + '" class="thumb-preview">'; };
-			reader.readAsDataURL(file);
-			field.appendChild(container);
+			
+			// Use requestAnimationFrame for smoother rendering
+			requestAnimationFrame(() => {
+				const reader = new FileReader();
+				reader.onload = e => { 
+					// Lazy load image
+					const img = new Image();
+					img.onload = () => {
+						requestAnimationFrame(() => {
+							container.innerHTML = '<img src="' + e.target.result + '" class="thumb-preview" loading="lazy">';
+						});
+					};
+					img.src = e.target.result;
+				};
+				reader.readAsDataURL(file);
+				field.appendChild(container);
+			});
 		}
 	}
 
 	function startCam(id) {
+		if (isProcessing) return;
+		isProcessing = true;
 		activeId = id;
-		navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
-		.then(s => { video.srcObject = s; document.getElementById('cam-modal').style.display = 'flex'; })
-		.catch(err => alert("Camera Access Denied."));
+		
+		// Use cached modal
+		const modal = domCache.camModal || document.getElementById('cam-modal');
+		
+		// Request camera with constraints for mobile
+		const constraints = {
+			video: {
+				facingMode: "environment",
+				width: { ideal: 1280, max: 1920 },
+				height: { ideal: 720, max: 1080 }
+			}
+		};
+		
+		navigator.mediaDevices.getUserMedia(constraints)
+		.then(s => { 
+			video.srcObject = s;
+			modal.style.display = 'flex';
+			isProcessing = false;
+		})
+		.catch(err => {
+			console.error('Camera error:', err);
+			alert("Camera Access Denied.");
+			isProcessing = false;
+		});
 	}
 
 	function stopCam() {
-		if(video.srcObject) video.srcObject.getTracks().forEach(t => t.stop());
-		document.getElementById('cam-modal').style.display = 'none';
+		if(video.srcObject) {
+			video.srcObject.getTracks().forEach(t => t.stop());
+			video.srcObject = null;
+		}
+		const modal = domCache.camModal || document.getElementById('cam-modal');
+		modal.style.display = 'none';
 	}
 
 	function capture() {
-		const c = document.createElement('canvas');
-		c.width = video.videoWidth; c.height = video.videoHeight;
-		c.getContext('2d').drawImage(video, 0, 0);
-		capturedCanvas = c;
+		if (isProcessing) return;
+		isProcessing = true;
 		
-		// Show cropping modal
-		const cropImg = document.getElementById('crop-image');
-		cropImg.src = c.toDataURL('image/jpeg');
-		
-		stopCam();
-		
-		// Initialize cropper after image loads
-		cropImg.onload = function() {
-			if (cropper) cropper.destroy();
-			cropper = new Cropper(cropImg, {
-				aspectRatio: NaN, // Free aspect ratio
-				viewMode: 1,
-				dragMode: 'move',
-				autoCropArea: 0.9,
-				restore: false,
-				guides: true,
-				center: true,
-				highlight: true,
-				cropBoxMovable: true,
-				cropBoxResizable: true,
-				toggleDragModeOnDblclick: false,
-			});
-			document.getElementById('crop-modal').style.display = 'flex';
-		};
+		// Use requestAnimationFrame for better performance
+		requestAnimationFrame(() => {
+			const c = document.createElement('canvas');
+			// Initial capture with mobile optimization
+			const maxWidth = 1920;
+			const maxHeight = 1080;
+			let width = video.videoWidth;
+			let height = video.videoHeight;
+			
+			if (width > maxWidth || height > maxHeight) {
+				const ratio = Math.min(maxWidth / width, maxHeight / height);
+				width *= ratio;
+				height *= ratio;
+			}
+			
+			c.width = width;
+			c.height = height;
+			c.getContext('2d').drawImage(video, 0, 0, width, height);
+			
+			// Apply document-specific resize rules
+			const resizedCanvas = resizeCanvasForDocument(c, activeId);
+			capturedCanvas = resizedCanvas;
+			
+			// Get quality settings for this document type
+			const dims = getDocumentDimensions(activeId);
+			const quality = dims.quality;
+			
+			// Show cropping modal
+			const cropImg = domCache.cropImage || document.getElementById('crop-image');
+			cropImg.src = resizedCanvas.toDataURL('image/jpeg', quality);
+			
+			stopCam();
+			
+			// Initialize cropper after image loads
+			cropImg.onload = function() {
+				requestAnimationFrame(() => {
+					if (cropper) cropper.destroy();
+					cropper = new Cropper(cropImg, {
+						aspectRatio: NaN,
+						viewMode: 1,
+						dragMode: 'move',
+						autoCropArea: 0.9,
+						restore: false,
+						guides: true,
+						center: true,
+						highlight: true,
+						cropBoxMovable: true,
+						cropBoxResizable: true,
+						toggleDragModeOnDblclick: false,
+						// Mobile optimizations
+						zoomable: true,
+						zoomOnTouch: true,
+						zoomOnWheel: false
+					});
+					const modal = domCache.cropModal || document.getElementById('crop-modal');
+					modal.style.display = 'flex';
+					isProcessing = false;
+					
+					// Show toast with resize info
+					const docType = activeId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+					showToast(`${docType} resized to ${resizedCanvas.width}x${resizedCanvas.height}px`, 'info', 2000);
+				});
+			};
+		});
 	}
 
 	function applyCrop() {
@@ -194,7 +917,11 @@
 		const croppedCanvas = cropper.getCroppedCanvas();
 		if (!croppedCanvas) return;
 		
-		// Convert to blob and set as file
+		// Get document-specific quality settings
+		const dims = getDocumentDimensions(activeId);
+		const quality = dims.quality;
+		
+		// Convert to blob with document-specific quality
 		croppedCanvas.toBlob(blob => {
 			const f = new File([blob], "cap.jpeg", {type: "image/jpeg"});
 			const dt = new DataTransfer(); dt.items.add(f);
@@ -202,7 +929,12 @@
 			target.files = dt.files;
 			showThumb(target);
 			closeCropModal();
-		}, 'image/jpeg', 0.9);
+			
+			// Show success toast with file info
+			const fileSizeKB = (blob.size / 1024).toFixed(1);
+			const docType = activeId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+			showToast(`${docType} saved: ${fileSizeKB}KB`, 'success', 2000);
+		}, 'image/jpeg', quality);
 	}
 	
 	function cancelCrop() {
@@ -214,62 +946,96 @@
 			cropper.destroy();
 			cropper = null;
 		}
-		document.getElementById('crop-modal').style.display = 'none';
+		const modal = domCache.cropModal || document.getElementById('crop-modal');
+		modal.style.display = 'none';
 		capturedCanvas = null;
+		
+		// Clear memory
+		if (domCache.cropImage) {
+			domCache.cropImage.src = '';
+		}
 	}
 
 	function read(f) { return new Promise(res => { const r = new FileReader(); r.onload = e => { const i = new Image(); i.onload = () => res(i); i.src = e.target.result; }; r.readAsDataURL(f); }); }
 
 	async function compressStrict(canvas, limitKB) {
+		// Performance optimization: limit maximum canvas size for mobile
+		const maxCanvasSize = Math.min(canvas.width, canvas.height, 2048);
+		let workCanvas = canvas;
+		
+		// Create optimized canvas if too large
+		if (canvas.width > maxCanvasSize || canvas.height > maxCanvasSize) {
+			const ratio = Math.min(maxCanvasSize / canvas.width, maxCanvasSize / canvas.height);
+			workCanvas = document.createElement('canvas');
+			workCanvas.width = canvas.width * ratio;
+			workCanvas.height = canvas.height * ratio;
+			workCanvas.getContext('2d').drawImage(canvas, 0, 0, workCanvas.width, workCanvas.height);
+		}
+		
 		let q = 0.8, blob, size = Infinity;
 		
-		// First try normal compression
-		while (size > limitKB && q > 0.05) {
-			blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', q));
-			size = blob.size / 1024;
-			q -= 0.05;
-		}
-		
-		// If still too large, reduce canvas dimensions
-		if (size > limitKB) {
-			let scale = 0.9;
-			while (size > limitKB && scale > 0.3) {
-				const scaledCanvas = document.createElement('canvas');
-				const scaledCtx = scaledCanvas.getContext('2d');
-				scaledCanvas.width = canvas.width * scale;
-				scaledCanvas.height = canvas.height * scale;
-				scaledCtx.drawImage(canvas, 0, 0, scaledCanvas.width, scaledCanvas.height);
-				
-				// Try compression again with reduced quality
-				q = 0.7;
-				while (size > limitKB && q > 0.1) {
-					blob = await new Promise(r => scaledCanvas.toBlob(r, 'image/jpeg', q));
+		// Use requestIdleCallback for non-blocking compression
+		return new Promise((resolve) => {
+			const compressStep = () => {
+				// First try normal compression
+				while (size > limitKB && q > 0.05) {
+					blob = new Promise(r => workCanvas.toBlob(r, 'image/jpeg', q));
 					size = blob.size / 1024;
-					q -= 0.1;
+					q -= 0.05;
 				}
 				
-				scale -= 0.1;
-			}
-		}
-		
-		// Final check - if still too large, use aggressive compression
-		if (size > limitKB) {
-			const finalCanvas = document.createElement('canvas');
-			const finalCtx = finalCanvas.getContext('2d');
-			finalCanvas.width = canvas.width * 0.5;
-			finalCanvas.height = canvas.height * 0.5;
-			finalCtx.drawImage(canvas, 0, 0, finalCanvas.width, finalCanvas.height);
+				// If still too large, reduce canvas dimensions
+				if (size > limitKB) {
+					let scale = 0.9;
+					while (size > limitKB && scale > 0.3) {
+						const scaledCanvas = document.createElement('canvas');
+						const scaledCtx = scaledCanvas.getContext('2d');
+						scaledCanvas.width = workCanvas.width * scale;
+						scaledCanvas.height = workCanvas.height * scale;
+						scaledCtx.drawImage(workCanvas, 0, 0, scaledCanvas.width, scaledCanvas.height);
+						
+						// Try compression again with reduced quality
+						q = 0.7;
+						while (size > limitKB && q > 0.1) {
+							blob = new Promise(r => scaledCanvas.toBlob(r, 'image/jpeg', q));
+							size = blob.size / 1024;
+							q -= 0.1;
+						}
+						
+						scale -= 0.1;
+					}
+				}
+				
+				// Final check - if still too large, use aggressive compression
+				if (size > limitKB) {
+					const finalCanvas = document.createElement('canvas');
+					const finalCtx = finalCanvas.getContext('2d');
+					finalCanvas.width = workCanvas.width * 0.5;
+					finalCanvas.height = workCanvas.height * 0.5;
+					finalCtx.drawImage(workCanvas, 0, 0, finalCanvas.width, finalCanvas.height);
+					
+					blob = new Promise(r => finalCanvas.toBlob(r, 'image/jpeg', 0.3));
+				}
+				
+				resolve(blob);
+			};
 			
-			blob = await new Promise(r => finalCanvas.toBlob(r, 'image/jpeg', 0.3));
-		}
-		
-		return blob;
+			// Use requestIdleCallback if available, otherwise setTimeout
+			if ('requestIdleCallback' in window) {
+				requestIdleCallback(compressStep, { timeout: 1000 });
+			} else {
+				setTimeout(compressStep, 0);
+			}
+		});
 	}
 
 	async function uploadToDrive() {
 		const stat = document.getElementById('status');
 		const folderID = document.getElementById('adv_name').value.trim();
-		if(!folderID || folderID.includes("Fetching")) { alert("Wait for ID!"); return; }
+		if(!folderID || folderID.includes("Fetching")) { 
+			showToast("Please wait for folder ID to load", "warning");
+			return; 
+		}
 
 		// Validation
 		const required = [
@@ -284,11 +1050,14 @@
 
 		for(let f of required) {
 			const el = document.getElementById(f.id);
-			if(!el || !el.files || !el.files[0]) { alert("Missing: " + f.n); return; }
+			if(!el || !el.files || !el.files[0]) { 
+				showToast("Missing: " + f.n, "error");
+				return; 
+			}
 		}
 
-		stat.innerText = "⏳ Zipping...";
-		stat.style.color = "orange";
+		updateProgress(10, "Processing documents...");
+		showToast("Starting document upload...", "info");
 
 		try {
 			const zip = new JSZip();
@@ -304,6 +1073,9 @@
 				{id:'w2_photo', n:'W2_Photo.jpeg', l:20}
 			];
 
+			let processedCount = 0;
+			const totalSingles = singles.length;
+			
 			for(let s of singles) {
 				const el = document.getElementById(s.id);
 				if(el && el.files[0]) {
@@ -311,7 +1083,14 @@
 					const c = document.createElement('canvas');
 					c.width = img.width; c.height = img.height;
 					c.getContext('2d').drawImage(img,0,0);
-					zip.file(s.n, await compressStrict(c, s.l));
+					
+					// Apply document-specific resize rules like capture function
+					const resizedCanvas = resizeCanvasForDocument(c, s.id);
+					
+					zip.file(s.n, await compressStrict(resizedCanvas, s.l));
+					processedCount++;
+					const progress = Math.round((processedCount / totalSingles) * 40) + 10;
+					updateProgress(progress, `Processing documents (${processedCount}/${totalSingles})...`);
 				}
 			}
 
@@ -323,6 +1102,9 @@
 				{f:'w2_af', b:'w2_ab', n:'W2_Aadhar_Merged.jpeg'}
 			];
 
+			let mergedCount = 0;
+			const totalMerged = merged.length;
+			
 			for(let m of merged) {
 				const fEl = document.getElementById(m.f);
 				const bEl = document.getElementById(m.b);
@@ -344,24 +1126,36 @@
 						c.width = imgF.width; c.height = imgF.height;
 						c.getContext('2d').drawImage(imgF,0,0);
 					}
-					zip.file(m.n, await compressStrict(c, 60));
+					
+					// Apply document-specific resize rules for merged Aadhar
+					const resizedCanvas = resizeCanvasForDocument(c, m.f);
+					
+					zip.file(m.n, await compressStrict(resizedCanvas, 60));
+					mergedCount++;
+					const progress = Math.round((mergedCount / totalMerged) * 30) + 50;
+					updateProgress(progress, `Merging Aadhar cards (${mergedCount}/${totalMerged})...`);
 				}
 			}
 
+			updateProgress(85, "Creating zip file...");
 			const content = await zip.generateAsync({type:"base64"});
-			stat.innerText = "🚀 Uploading...";
+			
+			updateProgress(90, "Uploading to server...");
 			const formData = new FormData();
 			formData.append('zipData', content);
 			formData.append('fileName', folderID + ".zip");
 			
 			const res = await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: formData });
-			stat.innerText = "✅ Success!";
-			stat.style.color = "green";
+			updateProgress(100, "Upload complete!");
+			
+			showToast("Documents uploaded successfully!", "success");
+			stat.innerHTML = '<div style="color: green;">Upload Complete!</div>';
 			document.getElementById('popupFolderId').textContent = folderID;
 			document.getElementById('successPopup').style.display = 'flex';
 		} catch (e) {
-			stat.innerText = "Error: " + e.message;
-			stat.style.color = "red";
+			console.error('Upload error:', e);
+			showToast("Upload failed: " + e.message, "error", 5000);
+			stat.innerHTML = '<div style="color: red;">Error: ' + e.message + '</div>';
 		}
 	}
 
