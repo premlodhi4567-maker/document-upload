@@ -5,6 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>Marriage Tokken Doecument Upload</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
 	<style>
 		:root { --primary: #1a73e8; --success: #2e7d32; --danger: #d93025; }
 		body { font-family: sans-serif; background: #eef2f5; padding: 10px; margin: 0; }
@@ -25,6 +27,13 @@
 		#cam-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:999; flex-direction:column; }
 		#video { width:100%; height:80%; object-fit: cover; }
 		.shutter { width:70px; height:70px; background:#fff; border-radius:50%; margin: 15px auto; border: 5px solid #444; cursor: pointer; }
+		#crop-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:1000; flex-direction:column; }
+		#crop-container { flex:1; display:flex; justify-content:center; align-items:center; padding:20px; }
+		#crop-image { max-width:100%; max-height:100%; }
+		.crop-controls { background:#333; padding:15px; display:flex; justify-content:center; gap:10px; }
+		.crop-btn { padding:10px 20px; border:none; border-radius:5px; cursor:pointer; font-weight:bold; }
+		.crop-ok { background:#4CAF50; color:#fff; }
+		.crop-cancel { background:#f44336; color:#fff; }
 	</style>
 </head>
 <body>
@@ -33,6 +42,16 @@
 	<video id="video" autoplay playsinline></video>
 	<div class="shutter" onclick="capture()"></div>
 	<button style="color:#fff; background:none; border:none; padding:10px; cursor:pointer;" onclick="stopCam()">[ CANCEL ]</button>
+</div>
+
+<div id="crop-modal">
+	<div id="crop-container">
+		<img id="crop-image">
+	</div>
+	<div class="crop-controls">
+		<button class="crop-btn crop-ok" onclick="applyCrop()">✓ OK</button>
+		<button class="crop-btn crop-cancel" onclick="cancelCrop()">✗ CANCEL</button>
+	</div>
 </div>
 
 <div class="container">
@@ -108,6 +127,8 @@
 
 	let activeId = '';
 	const video = document.getElementById('video');
+	let cropper = null;
+	let capturedCanvas = null;
 
 	function showThumb(input) {
 		const file = input.files[0];
@@ -138,25 +159,110 @@
 		const c = document.createElement('canvas');
 		c.width = video.videoWidth; c.height = video.videoHeight;
 		c.getContext('2d').drawImage(video, 0, 0);
-		c.toBlob(b => {
-			const f = new File([b], "cap.jpeg", {type: "image/jpeg"});
+		capturedCanvas = c;
+		
+		// Show cropping modal
+		const cropImg = document.getElementById('crop-image');
+		cropImg.src = c.toDataURL('image/jpeg');
+		
+		stopCam();
+		
+		// Initialize cropper after image loads
+		cropImg.onload = function() {
+			if (cropper) cropper.destroy();
+			cropper = new Cropper(cropImg, {
+				aspectRatio: NaN, // Free aspect ratio
+				viewMode: 1,
+				dragMode: 'move',
+				autoCropArea: 0.9,
+				restore: false,
+				guides: true,
+				center: true,
+				highlight: true,
+				cropBoxMovable: true,
+				cropBoxResizable: true,
+				toggleDragModeOnDblclick: false,
+			});
+			document.getElementById('crop-modal').style.display = 'flex';
+		};
+	}
+
+	function applyCrop() {
+		if (!cropper || !activeId) return;
+		
+		// Get cropped canvas
+		const croppedCanvas = cropper.getCroppedCanvas();
+		if (!croppedCanvas) return;
+		
+		// Convert to blob and set as file
+		croppedCanvas.toBlob(blob => {
+			const f = new File([blob], "cap.jpeg", {type: "image/jpeg"});
 			const dt = new DataTransfer(); dt.items.add(f);
 			const target = document.getElementById(activeId);
 			target.files = dt.files;
 			showThumb(target);
-			stopCam();
+			closeCropModal();
 		}, 'image/jpeg', 0.9);
+	}
+	
+	function cancelCrop() {
+		closeCropModal();
+	}
+	
+	function closeCropModal() {
+		if (cropper) {
+			cropper.destroy();
+			cropper = null;
+		}
+		document.getElementById('crop-modal').style.display = 'none';
+		capturedCanvas = null;
 	}
 
 	function read(f) { return new Promise(res => { const r = new FileReader(); r.onload = e => { const i = new Image(); i.onload = () => res(i); i.src = e.target.result; }; r.readAsDataURL(f); }); }
 
 	async function compressStrict(canvas, limitKB) {
 		let q = 0.8, blob, size = Infinity;
+		
+		// First try normal compression
 		while (size > limitKB && q > 0.05) {
 			blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', q));
 			size = blob.size / 1024;
 			q -= 0.05;
 		}
+		
+		// If still too large, reduce canvas dimensions
+		if (size > limitKB) {
+			let scale = 0.9;
+			while (size > limitKB && scale > 0.3) {
+				const scaledCanvas = document.createElement('canvas');
+				const scaledCtx = scaledCanvas.getContext('2d');
+				scaledCanvas.width = canvas.width * scale;
+				scaledCanvas.height = canvas.height * scale;
+				scaledCtx.drawImage(canvas, 0, 0, scaledCanvas.width, scaledCanvas.height);
+				
+				// Try compression again with reduced quality
+				q = 0.7;
+				while (size > limitKB && q > 0.1) {
+					blob = await new Promise(r => scaledCanvas.toBlob(r, 'image/jpeg', q));
+					size = blob.size / 1024;
+					q -= 0.1;
+				}
+				
+				scale -= 0.1;
+			}
+		}
+		
+		// Final check - if still too large, use aggressive compression
+		if (size > limitKB) {
+			const finalCanvas = document.createElement('canvas');
+			const finalCtx = finalCanvas.getContext('2d');
+			finalCanvas.width = canvas.width * 0.5;
+			finalCanvas.height = canvas.height * 0.5;
+			finalCtx.drawImage(canvas, 0, 0, finalCanvas.width, finalCanvas.height);
+			
+			blob = await new Promise(r => finalCanvas.toBlob(r, 'image/jpeg', 0.3));
+		}
+		
 		return blob;
 	}
 
