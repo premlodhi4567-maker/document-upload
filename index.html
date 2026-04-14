@@ -31,43 +31,43 @@
 		}
 		
 		body { 
+			margin: 0;
+			padding: 15px;
 			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-			background: #eef2f5; 
-			padding: var(--mobile-padding); 
-			margin: 0; 
-			line-height: 1.4;
-			-webkit-font-smoothing: antialiased;
-			-moz-osx-font-smoothing: grayscale;
+			background: #ffffff;
+			min-height: 100vh;
 		}
 		
 		.container { 
 			max-width: 650px; 
 			margin: 0 auto; 
-			background: #fff; 
+			background: #ffffff; 
 			padding: var(--mobile-padding); 
 			border-radius: 15px; 
-			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+			box-shadow: 0 4px 20px rgba(255,105,180,0.15);
+			border: 2px solid #ff69b4;
 			min-height: 100vh;
 		}
 		
 		.adv-section { 
-			background: #fffde7; 
+			background: #ffffff; 
 			padding: var(--mobile-padding); 
 			border-radius: 10px; 
 			margin-bottom: 20px; 
-			border: 2px solid #fbc02d;
+			border: 2px solid #ffd700;
+			box-shadow: 0 2px 10px rgba(255,215,0,0.2);
 		}
 		
 		.adv-input { 
 			width: 100%; 
 			padding: 16px; 
-			border: 1px solid #ccc; 
+			border: 2px solid #ffd700; 
 			border-radius: 8px; 
 			box-sizing: border-box; 
 			font-size: 1.2em; 
 			font-weight: bold; 
 			text-align: center; 
-			background: #eee;
+			background: #fffacd;
 			min-height: var(--touch-target);
 		}
 		
@@ -75,19 +75,20 @@
 			margin-bottom: 20px; 
 			padding: var(--mobile-padding); 
 			border-radius: 10px; 
-			border-top: 5px solid #ccc; 
-			background: #fafafa;
+			border-top: 5px solid #00bfff; 
+			background: #ffffff;
 			transition: transform 0.2s ease;
+			box-shadow: 0 2px 10px rgba(0,191,255,0.1);
 		}
 		
 		.section:active {
 			transform: scale(0.98);
 		}
 		
-		.boy { border-color: #2196f3; } 
-		.girl { border-color: #e91e63; } 
-		.wit { border-color: #673ab7; } 
-		.marr { border-color: #ff9800; }
+		.boy { border-color: #00bfff; } 
+		.girl { border-color: #ff69b4; } 
+		.wit { border-color: #9370db; } 
+		.marr { border-color: #ffa500; }
 		
 		.section-title { 
 			font-weight: bold; 
@@ -127,8 +128,8 @@
 		.btn-cam { 
 			width: 100%; 
 			padding: 12px; 
-			background: #fff; 
-			border: 2px solid #ddd; 
+			background: #ffffff; 
+			border: 2px solid #00bfff; 
 			border-radius: 8px; 
 			cursor: pointer; 
 			margin-top: 8px; 
@@ -136,19 +137,53 @@
 			min-height: var(--touch-target);
 			font-size: 16px;
 			transition: all 0.2s ease;
-			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+			box-shadow: 0 2px 8px rgba(0,191,255,0.3);
+			color: #0066cc;
 		}
 		
 		.btn-cam:hover {
-			background: #f8f9fa;
-			border-color: #007bff;
+			background: #e6f3ff;
+			border-color: #00bfff;
 			transform: translateY(-1px);
-			box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+			box-shadow: 0 4px 12px rgba(0,191,255,0.4);
 		}
 		
 		.btn-cam:active {
 			transform: translateY(0);
-			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+			box-shadow: 0 2px 6px rgba(0,191,255,0.3);
+		}
+		
+		.button-group {
+			display: flex;
+			gap: 10px;
+			margin-top: 8px;
+		}
+		
+		.btn-upload { 
+			flex: 1; 
+			padding: 12px; 
+			background: #ffffff; 
+			border: 2px solid #ffa500; 
+			border-radius: 8px; 
+			cursor: pointer; 
+			font-weight: bold;
+			min-height: var(--touch-target);
+			font-size: 16px;
+			transition: all 0.2s ease;
+			box-shadow: 0 2px 8px rgba(255,165,0,0.3);
+			color: #ff8c00;
+		}
+		
+		.btn-upload:hover {
+			background: #fff5e6;
+			border-color: #ffa500;
+			transform: translateY(-1px);
+			box-shadow: 0 4px 12px rgba(255,165,0,0.4);
+		}
+		
+		.btn-upload:active {
+			transform: translateY(0);
+			box-shadow: 0 2px 6px rgba(255,165,0,0.3);
 		}
 		
 		.thumb-container { 
@@ -174,8 +209,8 @@
 		#btn-submit { 
 			width: 100%; 
 			padding: 20px; 
-			background: var(--success); 
-			color: #fff; 
+			background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%); 
+			color: #ffffff; 
 			border: none; 
 			border-radius: 12px; 
 			font-size: 1.1em; 
@@ -183,19 +218,19 @@
 			cursor: pointer;
 			min-height: var(--touch-target);
 			transition: all 0.2s ease;
-			box-shadow: 0 4px 8px rgba(46,125,50,0.3);
+			box-shadow: 0 4px 15px rgba(0,255,0,0.4);
 			margin-top: 20px;
 		}
 		
 		#btn-submit:hover {
-			background: #2e7d32;
+			background: linear-gradient(135deg, #00ff00 0%, #00dd00 100%);
 			transform: translateY(-2px);
-			box-shadow: 0 6px 12px rgba(46,125,50,0.4);
+			box-shadow: 0 6px 20px rgba(0,255,0,0.5);
 		}
 		
 		#btn-submit:active {
 			transform: translateY(0);
-			box-shadow: 0 2px 4px rgba(46,125,50,0.3);
+			box-shadow: 0 2px 10px rgba(0,255,0,0.4);
 		}
 		
 		#status { 
@@ -426,35 +461,7 @@
 			}
 		}
 		
-		/* Dark mode support for mobile */
-		@media (prefers-color-scheme: dark) {
-			body {
-				background: #1a1a1a;
-				color: #fff;
-			}
-			
-			.container {
-				background: #2d2d2d;
-				box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-			}
-			
-			.section {
-				background: #383838;
-				border-color: #555;
-			}
-			
-			.btn-cam {
-				background: #3d3d3d;
-				border-color: #555;
-				color: #fff;
-			}
-			
-			.btn-cam:hover {
-				background: #4d4d4d;
-				border-color: #007bff;
-			}
-		}
-	</style>
+			</style>
 </head>
 <body>
 
@@ -484,39 +491,179 @@
 
 	<div class="section boy">
 		<span class="section-title">👦 Boy Documents</span>
-		<div class="field"><label>Photo * (20KB)</label><input type="file" id="b_photo" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_photo')">📸 Capture</button></div>
-		<div class="field"><label>PAN Card * (60KB)</label><input type="file" id="b_pan" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_pan')">📸 Capture</button></div>
-		<div class="field"><label>Marksheet * (60KB)</label><input type="file" id="b_mark" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_mark')">📸 Capture</button></div>
-		<div class="field"><label>Affidavit * (60KB)</label><input type="file" id="b_aff" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_aff')">📸 Capture</button></div>
-		<div class="field"><label>Aadhar Front *</label><input type="file" id="b_af" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_af')">📸 Capture</button></div>
-		<div class="field"><label>Aadhar Back</label><input type="file" id="b_ab" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('b_ab')">📸 Capture</button></div>
+		<div class="field">
+			<label>Photo * (20KB)</label>
+			<input type="file" id="b_photo" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('b_photo').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('b_photo')">📸 Capture</button>
+			</div>
+		</div>
+		<div class="field">
+			<label>PAN Card * (60KB)</label>
+			<input type="file" id="b_pan" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('b_pan').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('b_pan')"> Capture</button>
+			</div>
+		</div>
+		<div class="field">
+			<label>Marksheet * (60KB)</label>
+			<input type="file" id="b_mark" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('b_mark').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('b_mark')"> Capture</button>
+			</div>
+		</div>
+		<div class="field">
+			<label>Affidavit * (60KB)</label>
+			<input type="file" id="b_aff" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('b_aff').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('b_aff')"> Capture</button>
+			</div>
+		</div>
+		<div class="field">
+			<label>Aadhar Front *</label>
+			<input type="file" id="b_af" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('b_af').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('b_af')">📸 Capture</button>
+			</div>
+		</div>
+		<div class="field">
+			<label>Aadhar Back</label>
+			<input type="file" id="b_ab" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('b_ab').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('b_ab')">📸 Capture</button>
+			</div>
+		</div>
 	</div>
 
 	<div class="section girl">
 		<span class="section-title">👧 Girl Documents</span>
-		<div class="field"><label>Photo * (20KB)</label><input type="file" id="g_photo" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_photo')">📸 Capture</button></div>
-		<div class="field"><label>PAN Card * (60KB)</label><input type="file" id="g_pan" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_pan')">📸 Capture</button></div>
-		<div class="field"><label>Marksheet * (60KB)</label><input type="file" id="g_mark" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_mark')">📸 Capture</button></div>
-		<div class="field"><label>Affidavit * (60KB)</label><input type="file" id="g_aff" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_aff')">📸 Capture</button></div>
-		<div class="field"><label>Aadhar Front *</label><input type="file" id="g_af" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_af')">📸 Capture</button></div>
-		<div class="field"><label>Aadhar Back</label><input type="file" id="g_ab" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('g_ab')">📸 Capture</button></div>
+		<div class="field">
+			<label>Photo * (20KB)</label>
+			<input type="file" id="g_photo" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('g_photo').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('g_photo')"> Capture</button>
+			</div>
+		</div>
+		<div class="field">
+			<label>PAN Card * (60KB)</label>
+			<input type="file" id="g_pan" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('g_pan').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('g_pan')"> Capture</button>
+			</div>
+		</div>
+		<div class="field">
+			<label>Marksheet * (60KB)</label>
+			<input type="file" id="g_mark" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('g_mark').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('g_mark')"> Capture</button>
+			</div>
+		</div>
+		<div class="field">
+			<label>Affidavit * (60KB)</label>
+			<input type="file" id="g_aff" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('g_aff').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('g_aff')"> Capture</button>
+			</div>
+		</div>
+		<div class="field">
+			<label>Aadhar Front *</label>
+			<input type="file" id="g_af" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('g_af').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('g_af')">📸 Capture</button>
+			</div>
+		</div>
+		<div class="field">
+			<label>Aadhar Back</label>
+			<input type="file" id="g_ab" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('g_ab').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('g_ab')">📸 Capture</button>
+			</div>
+		</div>
 	</div>
 
 	<div class="section marr">
 		<span class="section-title">💍 Marriage Details</span>
-		<div class="field"><label>Marriage Certificate * (60KB)</label><input type="file" id="m_cert" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('m_cert')">📸 Capture</button></div>
+		<div class="field">
+			<label>Marriage Certificate * (60KB)</label>
+			<input type="file" id="m_cert" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('m_cert').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('m_cert')">📸 Capture</button>
+			</div>
+		</div>
 	</div>
 
 	<div class="section wit">
-		<span class="section-title">👥 Witnesses</span>
-		<div class="field"><label>W1 Photo * (20KB)</label><input type="file" id="w1_photo" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w1_photo')">📸 Capture</button></div>
-		<div class="field"><label>W1 Affidavit * (60KB)</label><input type="file" id="w1_aff" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w1_aff')">📸 Capture</button></div>
-		<div class="field"><label>W1 Aadhar Front *</label><input type="file" id="w1_af" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w1_af')">📸 Capture</button></div>
-		<div class="field"><label>W1 Aadhar Back</label><input type="file" id="w1_ab" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w1_ab')">📸 Capture</button></div>
+		<span class="section-title">Witnesses</span>
+		<div class="field">
+			<label>W1 Photo * (20KB)</label>
+			<input type="file" id="w1_photo" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('w1_photo').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('w1_photo')"> Capture</button>
+			</div>
+		</div>
+		<div class="field">
+			<label>W1 Affidavit * (60KB)</label>
+			<input type="file" id="w1_aff" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('w1_aff').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('w1_aff')"> Capture</button>
+			</div>
+		</div>
+		<div class="field">
+			<label>W1 Aadhar Front *</label>
+			<input type="file" id="w1_af" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('w1_af').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('w1_af')"> Capture</button>
+			</div>
+		</div>
+		<div class="field">
+			<label>W1 Aadhar Back</label>
+			<input type="file" id="w1_ab" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('w1_ab').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('w1_ab')"> Capture</button>
+			</div>
+		</div>
 		<hr>
-		<div class="field"><label>W2 Photo * (20KB)</label><input type="file" id="w2_photo" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w2_photo')">📸 Capture</button></div>
-		<div class="field"><label>W2 Aadhar Front *</label><input type="file" id="w2_af" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w2_af')">📸 Capture</button></div>
-		<div class="field"><label>W2 Aadhar Back</label><input type="file" id="w2_ab" onchange="showThumb(this)"><button class="btn-cam" onclick="startCam('w2_ab')">📸 Capture</button></div>
+		<div class="field">
+			<label>W2 Photo * (20KB)</label>
+			<input type="file" id="w2_photo" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('w2_photo').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('w2_photo')"> Capture</button>
+			</div>
+		</div>
+				<div class="field">
+			<label>W2 Aadhar Front *</label>
+			<input type="file" id="w2_af" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('w2_af').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('w2_af')">📸 Capture</button>
+			</div>
+		</div>
+		<div class="field">
+			<label>W2 Aadhar Back</label>
+			<input type="file" id="w2_ab" onchange="showThumb(this)" accept="image/*">
+			<div class="button-group">
+				<button class="btn-upload" onclick="document.getElementById('w2_ab').click()"> Upload</button>
+				<button class="btn-cam" onclick="startCam('w2_ab')">📸 Capture</button>
+			</div>
+		</div>
 	</div>
 
 	<button id="btn-submit" onclick="uploadToDrive()">SUBMIT ALL DOCUMENTS</button>
@@ -593,18 +740,10 @@
 		addTouchOptimizations();
 	}
 	
-	// Fetch ID with caching
+	// Fetch ID - always get new ID on page refresh
 	async function fetchID() {
 		const input = document.getElementById('adv_name');
-		const cachedId = localStorage.getItem('folderId');
-		const cacheTime = localStorage.getItem('folderIdTime');
-		const now = Date.now();
-		
-		// Use cached ID if less than 1 hour old
-		if (cachedId && cacheTime && (now - parseInt(cacheTime)) < 3600000) {
-			input.value = cachedId;
-			return;
-		}
+		input.value = "Fetching ID...";
 		
 		try {
 			const controller = new AbortController();
@@ -617,10 +756,6 @@
 			clearTimeout(timeoutId);
 			const id = await r.text();
 			input.value = id;
-			
-			// Cache the ID
-			localStorage.setItem('folderId', id);
-			localStorage.setItem('folderIdTime', now.toString());
 		} catch (e) { 
 			console.log('ID fetch failed, using fallback');
 			input.value = "ID-" + Math.floor(1000 + Math.random() * 9000);
@@ -737,6 +872,7 @@
 			'w1_aff': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
 			'w1_af': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
 			'w1_ab': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
+			'w2_aff': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
 			'w2_af': { maxWidth: 1200, maxHeight: 800, quality: 0.8 },
 			'w2_ab': { maxWidth: 1200, maxHeight: 800, quality: 0.8 }
 		};
@@ -778,6 +914,10 @@
 	function showThumb(input) {
 		const file = input.files[0];
 		if (file) {
+			// Allow any size image - system will resize/compress automatically
+			const fieldId = input.id;
+			const fileSizeKB = file.size / 1024;
+			
 			let field = input.closest('.field');
 			let container = field.querySelector('.thumb-container') || document.createElement('div');
 			container.className = 'thumb-container';
@@ -798,51 +938,94 @@
 				reader.readAsDataURL(file);
 				field.appendChild(container);
 			});
+			
+			// Show file size info (no restrictions)
+			showToast(`${fieldId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}: ${fileSizeKB.toFixed(1)}KB (will be resized)`, 'info', 2000);
 		}
 	}
 
 	function startCam(id) {
-		if (isProcessing) return;
+		console.log('startCam called with id:', id);
+		
+		if (isProcessing) {
+			console.log('Already processing, returning');
+			return;
+		}
 		isProcessing = true;
 		activeId = id;
 		
-		// Use cached modal
-		const modal = domCache.camModal || document.getElementById('cam-modal');
+		// Get elements
+		const modal = document.getElementById('cam-modal');
+		const video = document.getElementById('video');
 		
-		// Request camera with constraints for mobile
+		console.log('Modal found:', !!modal);
+		console.log('Video found:', !!video);
+		
+		if (!modal || !video) {
+			console.error('Camera modal or video element not found');
+			isProcessing = false;
+			return;
+		}
+		
+		// Show modal immediately
+		modal.style.display = 'flex';
+		console.log('Modal shown immediately');
+		
+		// Request camera with constraints for mobile - image capture mode
 		const constraints = {
 			video: {
 				facingMode: "environment",
 				width: { ideal: 1280, max: 1920 },
 				height: { ideal: 720, max: 1080 }
-			}
+			},
+			audio: false
 		};
+		
+		console.log('Requesting camera with constraints:', constraints);
 		
 		navigator.mediaDevices.getUserMedia(constraints)
 		.then(s => { 
+			console.log('Camera access granted');
 			video.srcObject = s;
-			modal.style.display = 'flex';
-			isProcessing = false;
+			video.play().then(() => {
+				console.log('Video playing successfully');
+				isProcessing = false;
+			}).catch(err => {
+				console.error('Video play error:', err);
+				isProcessing = false;
+			});
 		})
 		.catch(err => {
 			console.error('Camera error:', err);
-			alert("Camera Access Denied.");
+			alert("Camera Access Denied: " + err.message);
+			modal.style.display = 'none';
 			isProcessing = false;
 		});
 	}
 
 	function stopCam() {
-		if(video.srcObject) {
+		const video = document.getElementById('video');
+		const modal = document.getElementById('cam-modal');
+		
+		if(video && video.srcObject) {
 			video.srcObject.getTracks().forEach(t => t.stop());
 			video.srcObject = null;
 		}
-		const modal = domCache.camModal || document.getElementById('cam-modal');
-		modal.style.display = 'none';
+		if(modal) {
+			modal.style.display = 'none';
+		}
 	}
 
 	function capture() {
 		if (isProcessing) return;
 		isProcessing = true;
+		
+		const video = document.getElementById('video');
+		if (!video) {
+			console.error('Video element not found');
+			isProcessing = false;
+			return;
+		}
 		
 		// Use requestAnimationFrame for better performance
 		requestAnimationFrame(() => {
